@@ -1,0 +1,567 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sumin Seung</title>
+  <meta name="description" content="Sumin Seung — undergraduate astronomy researcher at Seoul National University working on exoplanets, direct imaging, and galaxy spectroscopy." />
+  <meta name="author" content="Sumin Seung" />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content="Sumin Seung" />
+  <meta property="og:description" content="Astronomy undergraduate at Seoul National University — exoplanets, direct imaging, galaxy spectroscopy." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Ccircle cx='50' cy='50' r='44' fill='%230c162e'/%3E%3Ccircle cx='80' cy='26' r='10' fill='%23f6f3ec'/%3E%3C/svg%3E" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --paper: #f6f3ec;
+      --paper-2: #efebe1;
+      --card: #fbf9f4;
+      --ink: #1b2540;
+      --soft: #46506b;
+      --faint: #7a8196;
+      --rule: #d9d3c4;
+      --accent: #c4860a;
+      --accent-soft: rgba(196, 134, 10, 0.1);
+      --gold: #f6f3ec; /* hover color on the night background (ivory) */
+      --night: #0a1328;
+      --night-2: #0c162e;
+      --line-night: rgba(255,255,255,0.78);
+      --text-night: #ffffff;
+      --soft-night: #aeb9d6;
+      --serif: 'Newsreader', Georgia, serif;
+      --sans: 'IBM Plex Sans', system-ui, -apple-system, sans-serif;
+      --mono: 'IBM Plex Mono', ui-monospace, monospace;
+    }
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html, body { height: 100%; }
+    body {
+      font-family: var(--sans);
+      font-size: 16.5px;
+      line-height: 1.7;
+      color: var(--ink);
+      background: var(--night);
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+    a { color: inherit; }
+    strong, b { font-weight: 600; }
+
+    /* BACKGROUND */
+    #sky { position: fixed; inset: 0; width: 100%; height: 100%; z-index: 0; transition: filter 0.5s ease, opacity 0.5s ease; }
+    body.open #sky { filter: blur(2px); opacity: 0.6; }
+    #veil { display: none; }
+
+    /* LANDING */
+    #wrapper {
+      position: relative; z-index: 2; min-height: 100vh;
+      display: flex; flex-direction: column; align-items: center; justify-content: center;
+      padding: 48px 20px 32px;
+    }
+    #header { display: flex; flex-direction: column; align-items: center; text-align: center; transition: opacity 0.35s ease, transform 0.35s ease, filter 0.35s ease; }
+    body.open #header, body.open #footer { opacity: 0; transform: scale(0.97); filter: blur(2px); pointer-events: none; }
+
+    .rule-top { width: 300px; max-width: 70vw; height: 1px; background: var(--ink); margin-bottom: 40px; }
+    h1 { font-family: var(--serif); font-size: 3rem; font-weight: 500; letter-spacing: -0.01em; line-height: 1.1; margin-bottom: 30px; }
+    h1 span { color: var(--accent); }
+
+    .avatar {
+      width: 220px; height: 220px; border-radius: 50%; overflow: hidden;
+      background: var(--paper-2);
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 0 0 1px var(--ink), 0 0 0 9px var(--paper), 0 0 0 10px var(--rule);
+    }
+    .avatar img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .avatar .initials { font-family: var(--serif); font-size: 3.6rem; color: var(--soft); }
+
+    .role { margin-top: 30px; font-family: var(--mono); font-size: 0.76rem; letter-spacing: 0.16rem; text-transform: uppercase; line-height: 2.1; color: var(--soft); }
+    .cv-link { margin-top: 14px; font-size: 0.86rem; font-weight: 600; letter-spacing: 0.16rem; text-transform: uppercase; text-decoration: none; border-bottom: 1px solid var(--accent); padding-bottom: 2px; }
+    .cv-link:hover { color: var(--accent); }
+
+    .rule-bottom { width: 300px; max-width: 70vw; height: 1px; background: var(--ink); margin-top: 34px; position: relative; }
+    .rule-bottom::after { content: ''; position: absolute; left: 50%; top: 0; width: 1px; height: 40px; background: var(--ink); }
+
+    nav.menu { margin-top: 40px; }
+    nav.menu ul { list-style: none; display: flex; border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; background: rgba(251,249,244,0.75); }
+    nav.menu li + li { border-left: 1px solid var(--ink); }
+    nav.menu a {
+      display: block; padding: 0 22px; line-height: 46px; min-width: 9rem; text-align: center;
+      font-size: 0.8rem; font-weight: 500; letter-spacing: 0.16rem; text-transform: uppercase; text-decoration: none;
+      transition: background 0.2s, color 0.2s;
+    }
+    nav.menu a:hover { background: var(--ink); color: var(--paper); }
+
+    #footer { position: relative; z-index: 2; margin-top: 40px; font-family: var(--mono); font-size: 0.68rem; letter-spacing: 0.14rem; text-transform: uppercase; color: var(--faint); transition: opacity 0.35s; }
+
+    /* PANELS */
+    #panels { position: fixed; inset: 0; z-index: 5; overflow-y: auto; display: none; padding: 48px 20px; }
+    body.open #panels { display: block; }
+    #panels .backdrop { position: fixed; inset: 0; background: rgba(246,243,236,0.55); }
+    article.panel {
+      position: relative; display: none;
+      width: 100%; max-width: 780px; margin: 0 auto;
+      background: var(--card); border: 1px solid var(--rule); border-radius: 14px;
+      box-shadow: 0 24px 60px rgba(27, 37, 64, 0.12);
+      padding: 56px 64px 52px;
+      opacity: 0; transform: translateY(14px);
+      transition: opacity 0.35s ease, transform 0.35s ease;
+    }
+    article.panel.active { display: block; }
+    article.panel.shown { opacity: 1; transform: none; }
+    .close {
+      position: absolute; top: 18px; right: 18px; width: 44px; height: 44px; border: 0; background: none; cursor: pointer;
+      border-radius: 50%; color: var(--ink);
+    }
+    .close:hover { background: var(--paper-2); color: var(--accent); }
+    .close::before, .close::after { content: ''; position: absolute; left: 13px; top: 21px; width: 18px; height: 1.5px; background: currentColor; }
+    .close::before { transform: rotate(45deg); }
+    .close::after { transform: rotate(-45deg); }
+
+    h2.major {
+      font-family: var(--sans); font-size: 2rem; font-weight: 600; letter-spacing: -0.01em; line-height: 1.2;
+      margin-bottom: 34px; padding-bottom: 14px; border-bottom: 1px solid var(--rule); position: relative;
+    }
+    h2.major::after { content: ''; position: absolute; left: 0; bottom: -1px; width: 56px; height: 2px; background: var(--accent); }
+    h3 { font-family: var(--mono); font-size: 0.76rem; font-weight: 500; letter-spacing: 0.12rem; text-transform: uppercase; color: var(--faint); margin: 36px 0 14px; }
+    h3:first-of-type { margin-top: 0; }
+    .panel p + h3 { margin-top: 36px; }
+    h4 { font-family: var(--sans); font-size: 1.65rem; font-weight: 600; line-height: 1.3; }
+    .panel p { color: var(--soft); }
+    .panel p strong, .panel li strong { color: var(--ink); }
+    .panel p + p { margin-top: 14px; }
+
+    .edu { list-style: none; color: var(--soft); }
+    .edu > li + li { margin-top: 12px; }
+    .edu .school { color: var(--ink); font-weight: 600; font-size: 1.55rem; line-height: 1.3; }
+    .edu .sub { padding-left: 20px; }
+    .edu em { color: var(--faint); font-style: normal; font-family: var(--mono); font-size: 0.82rem; }
+
+    .chips { display: flex; flex-wrap: wrap; gap: 10px; }
+    .chip {
+      display: inline-block; padding: 7px 18px; border-radius: 999px; font-size: 0.88rem; font-weight: 500; text-decoration: none;
+      background: var(--ink); color: var(--paper); border: 1px solid var(--ink); transition: background 0.2s, border-color 0.2s;
+    }
+    .chip.green { background: transparent; color: var(--ink); }
+    .chip.amber { background: var(--accent); border-color: var(--accent); color: #fff; }
+    .chip:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
+
+    .project { padding: 26px 0; border-top: 1px solid var(--rule); }
+    .project:first-of-type { border-top: 0; padding-top: 0; }
+    .project .when { font-family: var(--mono); font-size: 0.74rem; letter-spacing: 0.08rem; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+    .project h4 { margin-bottom: 8px; }
+    .project p { font-size: 0.98rem; }
+    .project ul { margin: 10px 0 0 20px; color: var(--soft); font-size: 0.96rem; }
+    .project ul li + li { margin-top: 4px; }
+    .project .out { margin-top: 12px; font-size: 0.86rem; color: var(--faint); }
+    .project .out strong { color: var(--ink); }
+
+    .list { list-style: none; }
+    .list li { padding: 16px 0; border-top: 1px solid var(--rule); }
+    .list li:first-child { border-top: 0; padding-top: 0; }
+    .list .t { font-family: var(--sans); font-size: 1.22rem; font-weight: 600; color: var(--ink); line-height: 1.4; }
+    .list .a { font-size: 0.93rem; color: var(--soft); margin-top: 3px; }
+    .list .a b { color: var(--ink); }
+    .list .v { font-size: 0.87rem; color: var(--faint); margin-top: 2px; }
+    .tag { display: inline-block; font-family: var(--mono); font-size: 0.68rem; padding: 1px 8px; border-radius: 4px; margin-right: 8px; vertical-align: 3px; border: 1px solid var(--rule); color: var(--soft); background: var(--paper-2); }
+    .tag.hi, .tag.oral { border-color: var(--accent); color: var(--accent); background: var(--accent-soft); }
+    .tag.poster { border-color: #3d6fb6; color: #3d6fb6; background: rgba(61,111,182,0.1); }
+    .tag.outreach { border-color: #2f7d5b; color: #2f7d5b; background: rgba(47,125,91,0.1); }
+    .tag.award { border-color: #b3455c; color: #b3455c; background: rgba(179,69,92,0.1); }
+
+    .interests { display: flex; flex-wrap: wrap; gap: 8px; }
+    .interests span { font-size: 0.85rem; padding: 5px 12px; border-radius: 999px; background: var(--paper-2); border: 1px solid var(--rule); color: var(--soft); }
+
+    .gallery { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; margin-top: 18px; }
+    .gallery figure { margin: 0; }
+    .gallery img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; border-radius: 10px; display: block; border: 1px solid var(--rule); }
+    .gallery figcaption { font-family: var(--mono); font-size: 0.7rem; letter-spacing: 0.06rem; color: var(--faint); margin-top: 6px; text-align: center; }
+    .figs { display: grid; gap: 14px; margin-top: 16px; }
+    .figs figure { margin: 0; }
+    .figs img { width: 100%; display: block; background: #fff; border: 1px solid var(--rule); border-radius: 8px; padding: 6px; cursor: zoom-in; transition: border-color 0.2s; }
+    .figs img:hover { border-color: var(--accent); }
+    .figs figcaption { font-size: 0.8rem; color: var(--faint); margin-top: 5px; }
+    #lightbox { position: fixed; inset: 0; z-index: 20; display: none; align-items: center; justify-content: center; background: rgba(6,10,24,0.88); padding: 24px; cursor: zoom-out; }
+    #lightbox.on { display: flex; }
+    #lightbox img { max-width: 100%; max-height: 100%; background: #fff; border-radius: 8px; padding: 10px; }
+    .contact-rows { list-style: none; }
+    .contact-rows li { display: grid; grid-template-columns: 120px 1fr; gap: 16px; padding: 12px 0; border-top: 1px solid var(--rule); }
+    .contact-rows li:first-child { border-top: 0; }
+    .contact-rows .k { font-family: var(--mono); font-size: 0.72rem; letter-spacing: 0.1rem; text-transform: uppercase; color: var(--faint); padding-top: 4px; }
+    .contact-rows .v { word-break: break-word; }
+
+    .panel a:not(.chip) { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
+    .panel a:not(.chip):hover { color: var(--accent); }
+
+    @media (max-width: 980px) {
+      nav.menu ul { flex-wrap: wrap; justify-content: center; border: 0; max-width: 560px; overflow: visible; padding: 1px 0 0 1px; border-radius: 0; background: none; }
+      nav.menu li { border: 1px solid var(--ink) !important; margin: -1px 0 0 -1px; flex: 1 1 33%; background: rgba(251,249,244,0.75); }
+      nav.menu a { min-width: 0; }
+    }
+    @media (max-width: 640px) {
+      h1 { font-size: 2.3rem; }
+      .avatar { width: 180px; height: 180px; }
+      nav.menu li { flex: 1 1 50%; }
+      article.panel { padding: 48px 24px 36px; }
+      h2.major { font-size: 1.8rem; }
+      .contact-rows li { grid-template-columns: 1fr; gap: 0; }
+      #panels { padding: 14px 10px; }
+    }
+    @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }
+
+    /* LANDING (night, poster style) */
+    #header, #footer { color: var(--text-night); }
+    .rule-top, .rule-bottom, .rule-bottom::after { background: var(--line-night) !important; }
+    h1 { color: #fff; font-family: 'IBM Plex Sans', sans-serif !important; font-weight: 600 !important; text-transform: uppercase; letter-spacing: 0.3em !important; padding-left: 0.3em; font-size: 2.6rem !important; }
+    @media (max-width: 640px) { h1 { font-size: 1.7rem !important; letter-spacing: 0.22em !important; } }
+    h1 span { color: var(--gold) !important; }
+    h1 span { display: none; }
+    .avatar { box-shadow: 0 0 0 1px rgba(255,255,255,0.25) !important; background: #1e2e51 !important; }
+    .role { color: var(--soft-night) !important; }
+    .cv-link { color: #fff; border-bottom: 1px dotted rgba(255,255,255,0.7) !important; }
+    .cv-link:hover { color: var(--gold) !important; }
+    nav.menu ul { border-color: var(--line-night) !important; background: rgba(12,22,46,0.55) !important; }
+    nav.menu li + li { border-left-color: var(--line-night) !important; }
+    nav.menu a { color: #fff; }
+    @media (max-width: 640px) { nav.menu li { display: flex; } nav.menu a { flex: 1; display: flex; align-items: center; justify-content: center; line-height: 1.4; padding: 14px 10px; } }
+    nav.menu a:hover { background: var(--gold) !important; color: var(--night) !important; }
+    #footer { color: rgba(174,185,214,0.7) !important; }
+    #panels .backdrop { background: rgba(6,10,24,0.55) !important; }
+    body.open #sky { opacity: 0.85 !important; }
+    @media (max-width: 980px) {
+      nav.menu li { border-color: var(--line-night) !important; background: rgba(12,22,46,0.55) !important; }
+      nav.menu ul { background: none !important; }
+    }
+  </style>
+</head>
+<body>
+
+<canvas id="sky" aria-hidden="true"></canvas>
+<div id="veil"></div>
+
+<div id="wrapper">
+  <header id="header">
+    <div class="rule-top"></div>
+    <h1>Sumin Seung<span>.</span></h1>
+    <div class="avatar">
+      <!-- 프로필 사진: photo.jpg 파일을 같은 폴더에 넣으면 자동으로 표시됩니다 -->
+      <img src="photo.jpg" alt="Portrait of Sumin Seung" onerror="this.remove(); document.querySelector('.avatar .initials').hidden=false;" />
+      <span class="initials" hidden>SS</span>
+    </div>
+    <div class="role">Undergraduate Student<br />Seoul National University</div>
+    <a class="cv-link" href="Sumin_Seung_CV.pdf" target="_blank" rel="noopener">Curriculum Vitae</a>
+    <div class="rule-bottom"></div>
+    <nav class="menu" aria-label="Sections">
+      <ul>
+        <li><a href="#about">About Me</a></li>
+        <li><a href="#research">Research</a></li>
+        <li><a href="#publications">Publications</a></li>
+        <li><a href="#talks">Talks</a></li>
+        <li><a href="#teaching">Outreach</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <footer id="footer">© 2026 Sumin Seung</footer>
+</div>
+
+<div id="panels" role="dialog" aria-modal="true">
+  <div class="backdrop" data-close></div>
+
+  <!-- ABOUT -->
+  <article class="panel" id="about">
+    <button class="close" data-close aria-label="Close"></button>
+    <h2 class="major">About Me</h2>
+
+    <h3>Education</h3>
+    <ul class="edu">
+      <li>
+        <div class="school">Seoul National University</div>
+        <div class="sub">B.Sc. in Earth Science Education, Double Major in Astronomy</div>
+        <div class="sub"><em>Mar 2022 – Aug 2027 (expected)</em></div>
+      </li>
+      <li>
+        <div class="school">University of Arizona</div>
+        <div class="sub">Exchange Student</div>
+        <div class="sub"><em>Aug 2025 – Dec 2025</em></div>
+      </li>
+    </ul>
+
+    <h3>Profiles</h3>
+    <div class="chips">
+      <a class="chip" href="#publications">Publications</a>
+      <a class="chip green" href="https://orcid.org/0009-0005-7181-9747">ORCID</a>
+      <a class="chip amber" href="Sumin_Seung_CV.pdf" target="_blank" rel="noopener">CV (PDF)</a>
+      <!-- GitHub 아이디가 생기면 아래 줄 주석을 풀고 YOUR-ID를 바꾸세요 -->
+      <!-- <a class="chip" href="https://github.com/YOUR-ID">GitHub</a> -->
+    </div>
+
+    <h3>Hello</h3>
+    <p>Hi! I'm Sumin, an undergraduate at <strong>Seoul National University</strong> studying Earth Science Education and Astronomy.</p>
+    <p>My research so far has covered quite a range of scales. At SNU, I've <strong>measured gas-phase metallicities for thousands of galaxies in and around massive clusters</strong>. During an exchange semester at the University of Arizona, I <strong>modeled how moons around directly imaged exoplanets could be detected</strong> from the tiny wobbles they cause in their host planets.</p>
+    <p>Each project added something to my toolkit: spectroscopic analysis, statistics on large surveys, and simulation-based forecasting. These days I'm most drawn to <strong>exoplanets</strong>, especially how direct imaging and spectroscopy can tell us what distant planets are really like.</p>
+
+    <h3>Research Interests</h3>
+    <div class="interests">
+      <span>Exoplanet direct imaging</span>
+      <span>High-contrast imaging &amp; AO</span>
+      <span>Exoplanet characterization</span>
+      <span>Exomoons</span>
+      <span>Instrumentation</span>
+      <span>Galaxy spectroscopy</span>
+      <span>Earth as a planet</span>
+    </div>
+
+
+
+    <h3>Honors &amp; Awards</h3>
+    <ul class="list">
+      <li><div class="t">Excellence Poster Award (top 3 of ~100)</div><div class="v">114th KAS Fall Meeting · 2026</div></li>
+      <li><div class="t">Dean's List with Distinction</div><div class="v">University of Arizona · 2025</div></li>
+      <li><div class="t">Korea–U.S. Advanced Industry Youth Exchange Scholarship</div><div class="v">MOTIE &amp; KIAT · 2025</div></li>
+      <li><div class="t">College of Natural Sciences Undergraduate Research Fellowship (twice)</div><div class="v">Seoul National University · 2024–2025</div></li>
+    </ul>
+
+    <h3>Outside Research</h3>
+    <p>I love exploring corners of nature I've never seen before, usually on a hiking trail. I also enjoy working out and playing the guitar.</p>
+    <div class="gallery">
+      <figure><img src="nature-rainbow.jpg" alt="Sumin watching a rainbow over red cliffs" loading="lazy" /><figcaption>Zion, UT</figcaption></figure>
+      <figure><img src="nature-whitesands.jpg" alt="White Sands dunes at dusk" loading="lazy" /><figcaption>White Sands, NM</figcaption></figure>
+      <figure><img src="nature-mongolia.jpg" alt="Sumin on a hillside in Mongolia" loading="lazy" /><figcaption>Mongolia</figcaption></figure>
+    </div>
+  </article>
+
+  <!-- RESEARCH -->
+  <article class="panel" id="research">
+    <button class="close" data-close aria-label="Close"></button>
+    <h2 class="major">Research</h2>
+    <p style="margin-bottom:30px">My research has spanned <strong>active galactic nuclei (AGN)</strong>, <strong>galaxy clusters</strong> (the largest gravitationally bound structures in the universe), and <strong>exomoons around α Centauri A</strong>. Looking ahead, I'm most interested in <strong>exoplanets</strong>, especially the search for <strong>Earth-like worlds</strong>.</p>
+
+    <div class="project">
+      <div class="when">Aug 2025 – Present · University of Arizona</div>
+      <h4>Detecting Exomoons around Directly Imaged Planets</h4>
+      <p>Using astrometric simulations, I studied how small a moon we could detect around a directly imaged planet, and how likely a detection is for the <strong>α Centauri A</strong> planet candidate.</p>
+      <ul>
+        <li><strong>Astrometric precision</strong> dominates the detection limit.</li>
+        <li>Detection probability reaches <strong>~35–40% at 10 µas</strong> across all population models.</li>
+        <li>Next-generation missions could reach <strong>sub-Earth-mass moons</strong>.</li>
+      </ul>
+      <div class="figs">
+        <figure><img src="fig-exo-scaling.jpg" alt="Sensitivity scaling plots" loading="lazy" /><figcaption>Minimum detectable moon mass vs. precision, cadence and duration.</figcaption></figure>
+        <figure><img src="fig-exo-prob.jpg" alt="Moon detectability maps" loading="lazy" /><figcaption>Detectable moons at 0.1 mas, 50 µas and 10 µas precision.</figcaption></figure>
+      </div>
+      <div class="out">Advisor: <a href="https://kevinwagner.space/"><strong>Prof. Kevin Wagner</strong></a> · First-author paper submitted to AJ; AAS 249 talk; AAS 247 poster; KAS 114 poster</div>
+    </div>
+
+    <div class="project">
+      <div class="when">Nov 2024 – Present · Seoul National University</div>
+      <h4>The Mass–Metallicity Relation of Galaxy Clusters</h4>
+      <p>I built a spectroscopic pipeline for <strong>~175,000 galaxies</strong> in nine massive local clusters and the field, and found that <strong>cluster galaxies are more metal-rich</strong> than field galaxies, a hint of environmental effects.</p>
+      <div class="figs">
+        <figure><img src="fig-mzr-map.jpg" alt="Cluster metallicity maps" loading="lazy" /><figcaption>Gas-phase metallicities of galaxies in nine massive clusters.</figcaption></figure>
+        <figure><img src="fig-mzr-clusters.jpg" alt="Per-cluster mass–metallicity relations" loading="lazy" /><figcaption>Mass–metallicity relations for each cluster.</figcaption></figure>
+        <figure><img src="fig-mzr-field.jpg" alt="Cluster versus field mass–metallicity relation" loading="lazy" /><figcaption>Cluster galaxies (MACH) vs. SDSS field galaxies.</figcaption></figure>
+      </div>
+      <div class="out">Advisor: <a href="https://astron.snu.ac.kr/en/%ec%86%90%ec%a3%bc%eb%b9%84-%ea%b5%90%ec%88%98/"><strong>Prof. Jubee Sohn</strong></a> · First-author paper in preparation</div>
+    </div>
+
+    <div class="project">
+      <div class="when">Dec 2023 – Oct 2024 · Seoul National University</div>
+      <h4>Feasibility of AGN Reverberation Mapping with SPHEREx</h4>
+      <p>Using simulated light curves, I tested whether <strong>SPHEREx</strong> could measure the size of the <strong>broad-line region of AGN</strong> through reverberation mapping.</p>
+      <div class="out">Advisor: Prof. Jong-Hak Woo · KAS poster</div>
+    </div>
+  </article>
+
+  <!-- PUBLICATIONS -->
+  <article class="panel" id="publications">
+    <button class="close" data-close aria-label="Close"></button>
+    <h2 class="major">Publications</h2>
+
+    <h3>Journal Articles</h3>
+    <ul class="list">
+      <li>
+        <div class="t"><span class="tag hi">Submitted</span>Astrometric Methods for Detecting Exomoons Orbiting Imaged Exoplanets. II: Mass Sensitivity Scaling Relations and Detection Probability</div>
+        <div class="a"><b>Seung, S.</b>, Wagner, K., Apai, D., et al.</div>
+        <div class="v">Submitted to <em>The Astronomical Journal</em></div>
+      </li>
+      <li>
+        <div class="t"><span class="tag">In prep.</span>The Mass–Metallicity Relation for Nine Massive Galaxy Clusters in the Local Universe</div>
+        <div class="a"><b>Seung, S.</b>, Sohn, J.</div>
+      </li>
+    </ul>
+
+    <h3>White Papers</h3>
+    <ul class="list">
+      <li>
+        <div class="t">A Scalable Path to Astrometric Exomoon Discoveries with the Nautilus Space Observatory</div>
+        <div class="a">Wagner, K., <b>Seung, S.</b>, Apai, D., et al.</div>
+        <div class="v">2026 · <a href="https://arxiv.org/abs/2606.28523">arXiv:2606.28523</a></div>
+      </li>
+    </ul>
+  </article>
+
+  <!-- TALKS -->
+  <article class="panel" id="talks">
+    <button class="close" data-close aria-label="Close"></button>
+    <h2 class="major">Talks &amp; Posters</h2>
+
+    <h3>Talks</h3>
+    <ul class="list">
+      <li>
+        <div class="t"><span class="tag oral">Oral</span>Astrometric Methods for Detecting Exomoons Orbiting Imaged Exoplanets. II</div>
+        <div class="v">249th AAS Meeting · Salt Lake City, UT · Jan 2027 (accepted)</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag oral">Oral</span>ExoPAG 35 Early Career Pop Presentation: Exomoon Astrometry</div>
+        <div class="v">ExoPAG 35, with AAS 249 · Salt Lake City, UT · Jan 2027 (selected)</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag oral">Oral</span>Mass Sensitivity Scaling Relations and Detection Probability for Astrometric Detection of Exomoons</div>
+        <div class="v">Alien Earths Group Meeting · virtual · Sep 2026</div>
+      </li>
+    </ul>
+
+    <h3>Posters</h3>
+    <ul class="list">
+      <li>
+        <div class="t"><span class="tag poster">Poster</span><span class="tag award">Award</span>Astrometric Methods for Detecting Exomoons Orbiting Imaged Exoplanets. II</div>
+        <div class="v">114th Korean Astronomical Society Fall Meeting · Gwacheon · Oct 2026 · Excellence Poster Award (top 3 of ~100)</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag poster">Poster</span>Exploring the Capability of Detecting Exomoons via Astrometric Simulations of α Centauri A</div>
+        <div class="v">247th AAS Meeting · Phoenix, AZ · Jan 2026</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag poster">Poster</span>Capability of SPHEREx for Reverberation Mapping of the AGN Broad Line Region</div>
+        <div class="v">110th Korean Astronomical Society Meeting · Gangneung · Oct 2024</div>
+      </li>
+    </ul>
+  </article>
+
+  <!-- TEACHING -->
+  <article class="panel" id="teaching">
+    <button class="close" data-close aria-label="Close"></button>
+    <h2 class="major">Outreach</h2>
+    <ul class="list">
+      <li>
+        <div class="t"><span class="tag">Service</span>Manager, Undergraduate Research Intern Office</div>
+        <div class="v">Astronomy Program, Seoul National University · Sep 2026 – present</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag outreach">Outreach</span>Seoul Learn Mentor</div>
+        <div class="a">Tutored mathematics and science for students from educationally underserved backgrounds.</div>
+        <div class="v">Seoul Metropolitan Government · May – Oct 2026</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag poster">Teaching</span>Student Teacher, Physics &amp; Earth Science</div>
+        <div class="a">Taught high-school physics and Earth science during a one-month teaching practicum.</div>
+        <div class="v">Junghwa Girls' High School, Daegu · May 2025</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag outreach">Outreach</span>Online Mentor</div>
+        <div class="v">Seoul Metropolitan Office of Education · Mar – Jun 2024</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag">Service</span>Executive Director, Student Council</div>
+        <div class="v">Dept. of Earth Science Education, Seoul National University · Dec 2023 – Nov 2024</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag">Service</span>Treasurer, Student Council</div>
+        <div class="v">Dept. of Earth Science Education, Seoul National University · Dec 2022 – Nov 2023</div>
+      </li>
+      <li>
+        <div class="t"><span class="tag outreach">Outreach</span>Mentor, Summer Camp for Space Career Exploration</div>
+        <div class="v">Young Astronauts Korea, Busan · Aug 2022</div>
+      </li>
+    </ul>
+  </article>
+
+  <!-- CONTACT -->
+  <article class="panel" id="contact">
+    <button class="close" data-close aria-label="Close"></button>
+    <h2 class="major">Contact</h2>
+    <p style="margin-bottom:26px">I'm always happy to talk about research, observing, or teaching. Feel free to reach out!</p>
+    <ul class="contact-rows">
+      <li><div class="k">Email</div><div class="v"><a href="mailto:ssm248@snu.ac.kr">ssm248@snu.ac.kr</a></div></li>
+      <li><div class="k">Affiliation</div><div class="v">Seoul National University<br />Seoul, Republic of Korea</div></li>
+      <li><div class="k">ORCID</div><div class="v"><a href="https://orcid.org/0009-0005-7181-9747">0009-0005-7181-9747</a></div></li>
+      <li><div class="k">CV</div><div class="v"><a href="Sumin_Seung_CV.pdf" target="_blank" rel="noopener">Sumin_Seung_CV.pdf</a></div></li>
+    </ul>
+  </article>
+</div>
+
+<div id="lightbox" aria-hidden="true"><img alt="" /></div>
+
+<script>
+  // ---------- Night sky: deep navy with sparse stars ----------
+  (function () {
+    const c = document.getElementById('sky');
+    const ctx = c.getContext('2d');
+    const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+    let stars = [], w, h;
+    function rand(seed) { return function () { seed = (seed * 16807) % 2147483647; return (seed - 1) / 2147483646; }; }
+    function seed() {
+      const dpr = Math.min(window.devicePixelRatio || 1, 2);
+      w = c.clientWidth; h = c.clientHeight;
+      c.width = w * dpr; c.height = h * dpr;
+      ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+      const r = rand(11);
+      const n = Math.round((w * h) / 9000);
+      stars = Array.from({ length: n }, () => ({
+        x: r() * w, y: r() * h,
+        s: r() < 0.9 ? r() * 0.7 + 0.3 : r() * 1.0 + 1.0,
+        a: r() * 0.5 + 0.3, tw: r() * 6.28, sp: r() * 0.7 + 0.2
+      }));
+    }
+    function draw(t) {
+      const bg = ctx.createLinearGradient(0, 0, 0, h);
+      bg.addColorStop(0, '#0c162e'); bg.addColorStop(1, '#090d1f');
+      ctx.fillStyle = bg; ctx.fillRect(0, 0, w, h);
+      for (const s of stars) {
+        const a = reduce ? s.a : s.a * (0.6 + 0.4 * Math.sin(s.tw + t * 0.001 * s.sp));
+        ctx.fillStyle = `rgba(255,255,255,${a})`;
+        ctx.beginPath(); ctx.arc(s.x, s.y, s.s, 0, Math.PI * 2); ctx.fill();
+      }
+      if (!reduce) requestAnimationFrame(draw);
+    }
+    seed(); requestAnimationFrame(draw);
+    let to; window.addEventListener('resize', () => { clearTimeout(to); to = setTimeout(() => { seed(); if (reduce) draw(0); }, 150); });
+  })();
+
+  // ---------- Panels (hash routing) ----------
+  (function () {
+    const panels = [...document.querySelectorAll('article.panel')];
+    const ids = panels.map(p => p.id);
+    let current = null;
+
+    function show(id) {
+      if (current) { current.classList.remove('active', 'shown'); current = null; }
+      if (!ids.includes(id)) { document.body.classList.remove('open'); return; }
+      const p = document.getElementById(id);
+      document.body.classList.add('open');
+      p.classList.add('active');
+      document.getElementById('panels').scrollTop = 0;
+      requestAnimationFrame(() => requestAnimationFrame(() => p.classList.add('shown')));
+      current = p;
+    }
+    function close() {
+      if (location.hash) history.pushState('', document.title, location.pathname + location.search);
+      show(null);
+    }
+
+    window.addEventListener('hashchange', () => show(location.hash.slice(1)));
+    document.querySelectorAll('[data-close]').forEach(el => el.addEventListener('click', close));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && current) close(); });
+    show(location.hash.slice(1));
+  })();
+  // ---------- Figure lightbox ----------
+  (function () {
+    const lb = document.getElementById('lightbox'), big = lb.querySelector('img');
+    document.querySelectorAll('.figs img').forEach(img => img.addEventListener('click', () => { big.src = img.src; big.alt = img.alt; lb.classList.add('on'); }));
+    lb.addEventListener('click', () => lb.classList.remove('on'));
+    document.addEventListener('keydown', e => { if (e.key === 'Escape' && lb.classList.contains('on')) { e.stopImmediatePropagation(); lb.classList.remove('on'); } }, true);
+  })();
+</script>
+</body>
+</html>
