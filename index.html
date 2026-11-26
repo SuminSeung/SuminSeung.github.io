@@ -86,7 +86,6 @@
     nav.menu ul { list-style: none; display: flex; border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; background: rgba(251,249,244,0.75); }
     nav.menu li { flex: 1 1 0; min-width: 0; }
     nav.menu ul { width: 69rem; max-width: 100%; position: relative; overflow: visible !important; }
-    nav.menu ul::before { content: ''; position: absolute; left: 50%; top: -42px; width: 1px; height: 42px; background: var(--line-night); }
     nav.menu li:first-child a { border-radius: 5px 0 0 5px; }
     nav.menu li:last-child a { border-radius: 0 5px 5px 0; }
     nav.menu li + li { border-left: 1px solid var(--ink); }
@@ -551,8 +550,11 @@
       current = p;
     }
     function close() {
-      if (location.hash) history.pushState('', document.title, location.pathname + location.search);
       show(null);
+      if (location.hash) {
+        try { history.pushState('', document.title, location.pathname + location.search); }
+        catch (e) { /* e.g. Safari on local files: the panel is already closed */ }
+      }
     }
 
     window.addEventListener('hashchange', () => show(location.hash.slice(1)));
