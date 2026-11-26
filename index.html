@@ -80,12 +80,15 @@
     .cv-link:hover { color: var(--accent); }
 
     .rule-bottom { width: 300px; max-width: 70vw; height: 1px; background: var(--ink); margin-top: 34px; position: relative; }
-    .rule-bottom::after { content: ''; position: absolute; left: 50%; top: 0; width: 1px; height: 40px; background: var(--ink); }
+    .rule-bottom::after { display: none; }
 
     nav.menu { margin-top: 40px; }
     nav.menu ul { list-style: none; display: flex; border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; background: rgba(251,249,244,0.75); }
     nav.menu li { flex: 1 1 0; min-width: 0; }
-    nav.menu ul { width: 69rem; max-width: 100%; }
+    nav.menu ul { width: 69rem; max-width: 100%; position: relative; overflow: visible !important; }
+    nav.menu ul::before { content: ''; position: absolute; left: 50%; top: -42px; width: 1px; height: 42px; background: var(--line-night); }
+    nav.menu li:first-child a { border-radius: 5px 0 0 5px; }
+    nav.menu li:last-child a { border-radius: 0 5px 5px 0; }
     nav.menu li + li { border-left: 1px solid var(--ink); }
     nav.menu a {
       display: block; padding: 0 22px; line-height: 46px; min-width: 9rem; text-align: center;
@@ -337,7 +340,7 @@
   <article class="panel" id="research">
     <button class="close" data-close aria-label="Close"></button>
     <h2 class="major">Research</h2>
-    <p style="margin-bottom:30px">My research has spanned <strong>active galactic nuclei (AGN)</strong>, <strong>galaxy clusters</strong> (the largest gravitationally bound structures in the universe), and <strong>exomoons around α Centauri A</strong>. Looking ahead, I'm most interested in <strong>exoplanets</strong>, especially the search for <strong>Earth-like worlds</strong>.</p>
+    <p style="margin-bottom:30px">My research has spanned <strong>galaxy clusters</strong>, the largest gravitationally bound structures in the universe, and <strong>exomoons around α Centauri A</strong>, with an earlier project on active galactic nuclei (AGN). Looking ahead, I'm most interested in <strong>exoplanets</strong>, especially the search for <strong>Earth-like worlds</strong>.</p>
 
     <div class="project">
       <div class="when">Aug 2025 – Present · University of Arizona</div>
