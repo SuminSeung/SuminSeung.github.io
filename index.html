@@ -84,6 +84,8 @@
 
     nav.menu { margin-top: 40px; }
     nav.menu ul { list-style: none; display: flex; border: 1px solid var(--ink); border-radius: 6px; overflow: hidden; background: rgba(251,249,244,0.75); }
+    nav.menu li { flex: 1 1 0; min-width: 0; }
+    nav.menu ul { width: 69rem; max-width: 100%; }
     nav.menu li + li { border-left: 1px solid var(--ink); }
     nav.menu a {
       display: block; padding: 0 22px; line-height: 46px; min-width: 9rem; text-align: center;
@@ -193,9 +195,9 @@
     .panel a:not(.chip) { text-decoration: underline; text-decoration-color: var(--accent); text-underline-offset: 3px; }
     .panel a:not(.chip):hover { color: var(--accent); }
 
-    @media (max-width: 980px) {
-      nav.menu ul { flex-wrap: wrap; justify-content: center; border: 0; max-width: 560px; overflow: visible; padding: 1px 0 0 1px; border-radius: 0; background: none; }
-      nav.menu li { border: 1px solid var(--ink) !important; margin: -1px 0 0 -1px; flex: 1 1 33%; background: rgba(251,249,244,0.75); }
+    @media (max-width: 1140px) {
+      nav.menu ul { width: auto; flex-wrap: wrap; justify-content: center; border: 0; max-width: 560px; overflow: visible; padding: 1px 0 0 1px; border-radius: 0; background: none; }
+      nav.menu li { border: 1px solid var(--ink) !important; margin: -1px 0 0 -1px; flex: 1 1 50%; background: rgba(251,249,244,0.75); }
       nav.menu a { min-width: 0; }
     }
     @media (max-width: 640px) {
@@ -228,7 +230,7 @@
     #footer { color: rgba(174,185,214,0.7) !important; }
     #panels .backdrop { background: rgba(6,10,24,0.55) !important; }
     body.open #sky { opacity: 0.85 !important; }
-    @media (max-width: 980px) {
+    @media (max-width: 1140px) {
       nav.menu li { border-color: var(--line-night) !important; background: rgba(12,22,46,0.55) !important; }
       nav.menu ul { background: none !important; }
     }
